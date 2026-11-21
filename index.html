@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+  <title>TaskFlow — Gestor de tarefas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-icon">✓</span><span>TaskFlow</span></a>
+      <p class="side-label">MENU</p>
+      <nav class="nav">
+        <button class="nav-item active" data-filter="all"><span>▦</span> Todas as tarefas <b id="navAll">0</b></button>
+        <button class="nav-item" data-filter="pending"><span>◷</span> Por fazer <b id="navPending">0</b></button>
+        <button class="nav-item" data-filter="completed"><span>✓</span> Concluídas <b id="navCompleted">0</b></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="tip-card">
+          <div class="tip-icon">✦</div>
+          <strong>Pequenos passos.</strong>
+          <p>Organiza as tuas tarefas e avança um dia de cada vez.</p>
+        </div>
+        <p class="copyright">TaskFlow · Gestor pessoal</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><p class="eyebrow" id="todayLabel">O TEU ESPAÇO DE TRABALHO</p><h1>As minhas tarefas</h1></div>
+        <button class="primary-btn" id="openFormBtn"><span>＋</span> Nova tarefa</button>
+      </header>
+
+      <section class="welcome">
+        <div><p class="welcome-kicker">VAMOS FAZER ACONTECER</p><h2>Um passo de cada vez. <span>Tu consegues.</span></h2><p>Planeia o teu dia, acompanha o progresso e conclui os teus objetivos.</p></div>
+        <div class="welcome-mark">✓</div>
+      </section>
+
+      <section class="stats">
+        <article class="stat-card"><div class="stat-top"><span>Total de tarefas</span><span class="stat-icon purple">▦</span></div><strong id="totalCount">0</strong><small>Registadas no total</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Por fazer</span><span class="stat-icon orange">◷</span></div><strong id="pendingCount">0</strong><small>Aguardam a tua atenção</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Concluídas</span><span class="stat-icon green">✓</span></div><strong id="completedCount">0</strong><small>Bom trabalho!</small></article>
+      </section>
+
+      <section class="task-section">
+        <div class="section-heading"><div><h2>Lista de tarefas</h2><p>Gere e acompanha as tuas actividades.</p></div>
+          <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Pesquisar tarefa..."></label>
+        </div>
+        <div class="toolbar">
+          <div class="filters">
+            <button class="filter-btn selected" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="pending">Por fazer</button>
+            <button class="filter-btn" data-filter="completed">Concluídas</button>
+          </div>
+          <select id="sortSelect" aria-label="Ordenar tarefas"><option value="newest">Mais recentes</option><option value="oldest">Mais antigas</option><option value="due">Data limite</option></select>
+        </div>
+        <div id="taskList" class="task-list"></div>
+        <div id="emptyState" class="empty-state hidden"><div>✧</div><h3>Nenhuma tarefa encontrada</h3><p>Adiciona uma nova tarefa ou altera os filtros.</p><button class="text-btn" id="emptyAddBtn">＋ Criar tarefa</button></div>
+      </section>
+      <footer>Feito para manter o teu dia organizado. <span>TaskFlow © 2026</span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="modal">
+    <form class="modal" id="taskForm">
+      <div class="modal-heading"><div><p class="eyebrow">ORGANIZA-TE</p><h2 id="modalTitle">Nova tarefa</h2></div><button type="button" class="close-btn" id="closeModal" aria-label="Fechar">×</button></div>
+      <label class="field">Título da tarefa<input id="taskTitle" type="text" maxlength="90" placeholder="Ex.: Estudar Física I" required></label>
+      <label class="field">Descrição <textarea id="taskDescription" rows="3" maxlength="300" placeholder="Adiciona alguns detalhes (opcional)"></textarea></label>
+      <div class="form-row">
+        <label class="field">Prioridade<select id="taskPriority"><option value="normal">Normal</option><option value="high">Alta</option><option value="low">Baixa</option></select></label>
+        <label class="field">Data limite<input id="taskDue" type="date"></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="secondary-btn" id="cancelBtn">Cancelar</button><button class="primary-btn" type="submit" id="saveBtn">Guardar tarefa</button></div>
+    </form>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
